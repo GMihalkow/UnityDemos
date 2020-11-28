@@ -10,12 +10,12 @@ public class OptionsMenuScript : MonoBehaviour
 
     void Start()
     {
-        this.backBtn.onClick.AddListener(() => SceneManager.LoadSceneAsync("MainMenuScene", LoadSceneMode.Single));
-        this.alphaSlider.onValueChanged.AddListener((val) =>
-        {
-            // TODO [GM]: Implement
-            //var (r, g, b, a) = this.bg.color; 
-            //this.bg.color = new Color(this.bg.color.r, this.bg.color.g, this.bg.color.b)
-        });
+        this.backBtn
+            .onClick
+            .AddListener(() => SceneManager.LoadSceneAsync("MainMenuScene", LoadSceneMode.Single));
+
+        this.alphaSlider
+            .onValueChanged
+            .AddListener((val) => this.bg.color = new Color(this.bg.color.r, this.bg.color.g, this.bg.color.b, val));
     }
 }
