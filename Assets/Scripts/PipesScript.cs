@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Timers;
 using UnityEngine;
 
 public class PipesScript : MonoBehaviour
@@ -10,15 +11,19 @@ public class PipesScript : MonoBehaviour
     private const float _allowedRandomThreshold = 0.5f;
 
     public GameObject bird;
+    public float increaseSpeedAmount;
     public float movementSpeed;
     private GameObject[] _pipes;
     private BirdScript _birdScript;
 
-    // TODO [GM]: Implement speeding up the pipes movment every 5 seconds
     void Start()
     {
         this._birdScript = this.bird.GetComponent<BirdScript>();
         this._pipes = GameObject.FindGameObjectsWithTag("Pipe");
+
+        var timer = new Timer(5000);
+        timer.Elapsed += this.OnFiveSecondsPassed;
+        timer.Enabled = true;
     }
 
     void Update()
@@ -44,4 +49,6 @@ public class PipesScript : MonoBehaviour
             }
         }
     }
+
+    void OnFiveSecondsPassed(object sender, ElapsedEventArgs args) => this.movementSpeed += this.increaseSpeedAmount;
 }

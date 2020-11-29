@@ -849,6 +849,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bird: {fileID: 685908420}
+  increaseSpeedAmount: 0.5
   movementSpeed: 1
 --- !u!1 &1104201748
 GameObject:
