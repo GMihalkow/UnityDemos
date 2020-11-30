@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Timers;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PipesScript : MonoBehaviour
 {
@@ -11,10 +12,12 @@ public class PipesScript : MonoBehaviour
     private const float _allowedRandomThreshold = 0.5f;
 
     public GameObject bird;
+    public Text scoreText;
     public float increaseSpeedAmount;
     public float movementSpeed;
     private GameObject[] _pipes;
     private BirdScript _birdScript;
+    private int _score = 0;
 
     void Start()
     {
@@ -46,6 +49,7 @@ public class PipesScript : MonoBehaviour
 
                 pipePos.y = Random.Range(threshold - _allowedRandomThreshold, threshold + _allowedRandomThreshold);
                 pipe.transform.position = pipePos;
+                this.scoreText.text = $"{++this._score}";
             }
         }
     }
