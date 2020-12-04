@@ -11,16 +11,19 @@ public class PipesScript : MonoBehaviour
     private const float _lowerYPipeThreshold = -0.13f;
     private const float _allowedRandomThreshold = 0.5f;
 
+    public GameObject gameOverScreen;
     public GameObject bird;
     public Text scoreText;
     public float increaseSpeedAmount;
     public float movementSpeed;
     private GameObject[] _pipes;
     private BirdScript _birdScript;
+    private AudioSource _audioSource;
     private int _score = 0;
 
     void Start()
     {
+        this._audioSource = this.gameObject.GetComponent<AudioSource>();
         this._birdScript = this.bird.GetComponent<BirdScript>();
         this._pipes = GameObject.FindGameObjectsWithTag("Pipe");
 
@@ -31,7 +34,15 @@ public class PipesScript : MonoBehaviour
 
     void Update()
     {
-        if (this._birdScript.IsDead) return;
+        if (this._birdScript.IsDead && !this.scoreText.IsDestroyed())
+        {
+            Destroy(this.scoreText.gameObject);
+        }
+        else if (this._birdScript.IsDead && !this.gameOverScreen.activeSelf)
+        {
+            this.gameOverScreen.SetActive(true);
+        }
+        else if (this._birdScript.IsDead) return;
 
         foreach (var pipe in this._pipes)
         {
@@ -50,6 +61,7 @@ public class PipesScript : MonoBehaviour
                 pipePos.y = Random.Range(threshold - _allowedRandomThreshold, threshold + _allowedRandomThreshold);
                 pipe.transform.position = pipePos;
                 this.scoreText.text = $"{++this._score}";
+                this._audioSource.Play();
             }
         }
     }
