@@ -29,6 +29,7 @@ public class MenuScript : MonoBehaviour
             script.onDeath += this.OnBirdDeath;
 
             this.pipesScript.birdScript = script;
+            this.pipesScript.AttachBirdDeathCallback();
 
             this.restartBtn.gameObject.SetActive(false);
             this.gameOverScreen.SetActive(false);
@@ -42,7 +43,6 @@ public class MenuScript : MonoBehaviour
         birdScript.onDeath += this.OnBirdDeath;
     }
 
-    // TODO [GM]: fix score synchronization bug
     void OnBirdDeath()
     {
         this.gameOverScreen.SetActive(true);

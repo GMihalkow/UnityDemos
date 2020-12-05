@@ -20,9 +20,13 @@ public class PipesScript : MonoBehaviour
     private GameObject[] _pipes;
     private AudioSource _audioSource;
     private int _score = 0;
+    private float _initialMovementSpeed;
+
+    public void AttachBirdDeathCallback() => this.birdScript.onDeath += this.OnBirdDeath;
 
     void Start()
     {
+        this._initialMovementSpeed = this.movementSpeed;
         this._audioSource = this.gameObject.GetComponent<AudioSource>();
         this._pipes = GameObject.FindGameObjectsWithTag("Pipe");
 
@@ -66,5 +70,9 @@ public class PipesScript : MonoBehaviour
 
     void OnFiveSecondsPassed(object sender, ElapsedEventArgs args) => this.movementSpeed += this.increaseSpeedAmount;
 
-    void OnBirdDeath() => this._score = 0;
+    void OnBirdDeath()
+    {
+        this.movementSpeed = this._initialMovementSpeed;
+        this._score = 0;
+    }
 }

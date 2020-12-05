@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class BirdScript : MonoBehaviour
 {
@@ -49,7 +50,14 @@ public class BirdScript : MonoBehaviour
         this._isDead = true;
         this._rigidbody.gravityScale = _gravityScaleAfterDeath;
         this._animator.SetBool("CanFly", false);
-        Destroy(this.gameObject, _deathTimeout);
+
+        this.StartCoroutine(this.DeathCoroutine());
+    }
+
+    IEnumerator DeathCoroutine()
+    {
+        yield return new WaitForSeconds(_deathTimeout);
         this.onDeath.Invoke();
+        Destroy(this.gameObject);
     }
 }
