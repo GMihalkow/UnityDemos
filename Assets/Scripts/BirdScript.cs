@@ -14,6 +14,10 @@ public class BirdScript : MonoBehaviour
     private AudioSource _audioSource;
 
     public bool IsDead => this._isDead;
+    
+    public delegate void DeathHandler();
+    
+    public event DeathHandler onDeath;
 
     void Start()
     {
@@ -32,6 +36,8 @@ public class BirdScript : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
+        if (this.IsDead) return;
+
         if (!this._audioSource.isPlaying)
         {
             this._audioSource.clip = this.deathSound;
@@ -44,5 +50,6 @@ public class BirdScript : MonoBehaviour
         this._rigidbody.gravityScale = _gravityScaleAfterDeath;
         this._animator.SetBool("CanFly", false);
         Destroy(this.gameObject, _deathTimeout);
+        this.onDeath.Invoke();
     }
 }
