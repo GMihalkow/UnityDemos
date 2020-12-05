@@ -5,21 +5,19 @@ public class BirdScript : MonoBehaviour
     private const float _deathTimeout = 2f;
     private const float _gravityScaleAfterDeath = 3f;
 
+    public AudioClip hitSound;
+    public AudioClip deathSound;
     public float jumpForce;
     private bool _isDead;
     private Rigidbody2D _rigidbody;
     private Animator _animator;
-    private AudioSource _deathAudioSource;
-    //private AudioSource _hitAudioSource;
+    private AudioSource _audioSource;
 
     public bool IsDead => this._isDead;
 
     void Start()
     {
-        var audioSources = this.gameObject.GetComponents<AudioSource>();
-
-        //this._hitAudioSource = this.gameObject.GetComponent<AudioSource>();
-        this._deathAudioSource = this.gameObject.GetComponent<AudioSource>();
+        this._audioSource = this.gameObject.GetComponent<AudioSource>();
         this._animator = this.gameObject.GetComponent<Animator>();
         this._rigidbody = this.gameObject.GetComponent<Rigidbody2D>();
     }
@@ -34,9 +32,12 @@ public class BirdScript : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!this._deathAudioSource.isPlaying)
+        if (!this._audioSource.isPlaying)
         {
-            this._deathAudioSource.Play();
+            this._audioSource.clip = this.deathSound;
+
+            this._audioSource.Play();
+            this._audioSource.PlayOneShot(this.hitSound);
         }
 
         this._isDead = true;
