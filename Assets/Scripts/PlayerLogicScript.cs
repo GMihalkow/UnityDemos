@@ -7,6 +7,8 @@ public delegate void PauseGame();
 public class PlayerLogicScript : MonoBehaviour
 {
     public event PauseGame pauseGame;
+    public Slider healthSlider;
+    public Text scoreElement;
     int _health;
     int _score;
     bool isAlive = true;
@@ -25,6 +27,7 @@ public class PlayerLogicScript : MonoBehaviour
         set
         {
             _health = value;
+            this.healthSlider.value = value;
         }
     }
 
@@ -39,6 +42,7 @@ public class PlayerLogicScript : MonoBehaviour
             if (isAlive)
             {
                 _score = value;
+                this.scoreElement.text = _score.ToString();
             }
         }
     }

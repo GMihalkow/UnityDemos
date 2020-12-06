@@ -1,13 +1,13 @@
-1.MenuScene -> Направете бутоните да работят при клик.(MenuSceneScript.cs)
+DONE // 1.MenuScene -> Направете бутоните да работят при клик.(MenuSceneScript.cs)
 			PlayButon - Да зарежда GameScene
 			QuitButton - Да излиза от играта
 
 Всички задачи надолу се отнасят за GameScene
-2.Направете PauseButton  да вика метод OnPauseClicked от PlayerLogicscript.cs;
-3.Направете Health Bar-a (UI Slider) и Score (UI Text) да се обновяват в PlayerLogicScript.cs
-4.Направете кораба да се движи чрез WASD и стрелките като използвате "speed" за скорост - PlayerShipScript.cs.
-5.Направете кораба да се движи в рамките на екрана като използвате minX, maxX, minZ,maxZ - PlayerShipScript.cs.
-6.Направете кръвта(health) на играча да намалява с 5 ако се удари в друг кораб - PlayerShipScript.cs.
+DONE // 2.Направете PauseButton  да вика метод OnPauseClicked от PlayerLogicscript.cs;
+DONE // 3.Направете Health Bar-a (UI Slider) и Score (UI Text) да се обновяват в PlayerLogicScript.cs
+DONE // 4.Направете кораба да се движи чрез WASD и стрелките като използвате "speed" за скорост - PlayerShipScript.cs.
+DONE // 5.Направете кораба да се движи в рамките на екрана като използвате minX, maxX, minZ,maxZ - PlayerShipScript.cs.
+DONE // 6.Направете кръвта(health) на играча да намалява с 5 ако се удари в друг кораб - PlayerShipScript.cs.
 7.Направете gameobject-a на експлозията (след смъртта на вражески кораб) да се destroy-ва след като свърши.
 8.Добавете код, чрез който да се запазват точките на играча (PlayerLogicScript.cs -> Scores)след затваряне на играта и при повторно пускане да се зареждат и играча да продължава да трупа върху старите.Ако играчът умре точките трябва да се нулират. 
 9.Ако кръвта на играча падне под нула, той трябва да умре. Играта трябва да се паузира. Корабът трябва да не се вижда повече, а "DeadLabel" (UI Text) трябва да се покаже на екрана. Анимация на експлозия трябва да се покаже в този момент.(Resources/Explosion.prefab)
