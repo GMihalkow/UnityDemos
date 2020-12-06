@@ -37,6 +37,7 @@ public class MenuScript : MonoBehaviour
             this.score.text = "0";
 
             this.bird.SetActive(true);
+            this.pipesScript.gameHasStarted = true;
         });
 
         var birdScript = this.bird.GetComponent<BirdScript>();
@@ -45,6 +46,7 @@ public class MenuScript : MonoBehaviour
 
     void OnBirdDeath()
     {
+        this.pipesScript.gameHasStarted = false;
         this.gameOverScreen.SetActive(true);
         this.score.gameObject.SetActive(false);
         this.restartBtn.gameObject.SetActive(true);
