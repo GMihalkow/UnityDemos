@@ -9,6 +9,7 @@ public class EnemyScript : ShipScript
     float minSpeed = 0.025f;
     bool isFiring;
     int _enemyHealth = 10;
+    float destroyExplosionTimeout = 1f;
     float outOfScreenValueMax = 3f;
     float outOfScreenValueMin = -12f;
     float playerChaseTimeMin = 0.5f;
@@ -91,6 +92,8 @@ public class EnemyScript : ShipScript
     {
         Destroy(this.gameObject);
         playerLogicScript.Score++;
-        GameObject.Instantiate(Resources.Load("Explosion"), transform.position, Quaternion.Euler(90f, 0f, 0f));
+        
+        var explosion = Instantiate(Resources.Load("Explosion"), transform.position, Quaternion.Euler(90f, 0f, 0f));
+        Destroy(explosion, destroyExplosionTimeout);
     }
 }
