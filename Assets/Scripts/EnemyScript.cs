@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class EnemyScript : ShipScript
 {
@@ -9,6 +8,7 @@ public class EnemyScript : ShipScript
     float minSpeed = 0.025f;
     bool isFiring;
     int _enemyHealth = 10;
+    Vector3 spawnPosition = new Vector3(0f, 0f, 2.65f);
     float destroyExplosionTimeout = 1f;
     float outOfScreenValueMax = 3f;
     float outOfScreenValueMin = -12f;
@@ -27,7 +27,15 @@ public class EnemyScript : ShipScript
 
     void OnEnable()
     {
+        speed = Random.RandomRange(minSpeed, maxSpeed);
+        playerChaseTime = Random.RandomRange(playerChaseTimeMin, playerChaseTimeMax);
+
         Start();
+    }
+
+    void OnDisable()
+    {
+        this.transform.position = spawnPosition;
     }
 
     public int EnemyHealth
@@ -63,7 +71,7 @@ public class EnemyScript : ShipScript
 
         if (transform.position.z > outOfScreenValueMax || transform.position.z < outOfScreenValueMin)
         {
-            Destroy(this.gameObject);
+            DestroyMe();
         }
 
         if (isFiring && Time.frameCount % 12 == 0)
@@ -90,10 +98,11 @@ public class EnemyScript : ShipScript
 
     public void DestroyMe()
     {
-        Destroy(this.gameObject);
         playerLogicScript.Score++;
         
         var explosion = Instantiate(Resources.Load("Explosion"), transform.position, Quaternion.Euler(90f, 0f, 0f));
         Destroy(explosion, destroyExplosionTimeout);
+
+        this.gameObject.SetActive(false);
     }
 }
